@@ -1,9 +1,10 @@
 require 'json'
 require 'rest-client'
 
-class Pokedex 
+class Pokedex  
     def find (pokemon_id) 
         url = "https://pokeapi.co/api/v2/pokemon/#{pokemon_id}"
+    begin
         respuesta = RestClient.get url 
         resultado =JSON.parse respuesta.to_str 
         nombre = resultado['forms'] [0] ['name']
@@ -15,17 +16,18 @@ class Pokedex
         else
             tipo2 == nil
         end
+
+       
+
         pokemon = {nombre:, id:, tipo:, tipo2:}
+    rescue
+        :error
     end
-        
+    end  
 end 
 
-pokedex = Pokedex.new 
 
-puts pokedex.find(1)
-puts pokedex.find(25)
-puts pokedex.find(1000)
-puts pokedex.find(6)
+
 
 
 
